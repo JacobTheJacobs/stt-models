@@ -1,0 +1,500 @@
+{
+  "version": 1,
+  "release": "models-v1",
+  "models": {
+    "he": {
+      "engine": "Zipformer2 66M streaming Hebrew INT8",
+      "runtime": "sherpa-onnx",
+      "license": "CC-BY-4.0",
+      "source": "https://huggingface.co/ivrit-ai/zipformer2-66m-streaming-he",
+      "revision": "ee769a2a13b887f91572eec349458bfb0fe79e7a",
+      "files": [
+        {
+          "name": "encoder.int8.onnx",
+          "asset": "he-zipformer-encoder.int8.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-encoder.int8.onnx",
+          "bytes": 70478964,
+          "sha256": "6c6febcb74a09435315a1d872a6539f6e7fc2c333533f14c74edc0e85c49ffcd"
+        },
+        {
+          "name": "decoder.int8.onnx",
+          "asset": "he-zipformer-decoder.int8.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-decoder.int8.onnx",
+          "bytes": 1049105,
+          "sha256": "feb03e7c8aa761593a9284a6fa1e91259be3702de75f630062256c1a59c5a906"
+        },
+        {
+          "name": "joiner.int8.onnx",
+          "asset": "he-zipformer-joiner.int8.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-joiner.int8.onnx",
+          "bytes": 771805,
+          "sha256": "1d2c6d8e6dabc5eb52de52e95718e9bdfbffbfe7ead3808fb5ffd74e83bd9cae"
+        },
+        {
+          "name": "tokens.txt",
+          "asset": "he-zipformer-tokens.txt",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-tokens.txt",
+          "bytes": 17086,
+          "sha256": "e4ebb5e72a6aeef47437a55fa2308ebbedb7c51c557de7a89bf965c23ea9af4a"
+        }
+      ]
+    },
+    "fr": {
+      "engine": "Kroko Community 64-L streaming FR",
+      "runtime": "sherpa-onnx",
+      "license": "CC-BY-SA",
+      "source": "https://huggingface.co/Banafo/Kroko-ASR",
+      "revision": "d45212aeb212dd66083dd22710c9954f40ff8cc1",
+      "files": [
+        {
+          "name": "Kroko-FR-Community-64-L-Streaming-001.data",
+          "asset": "fr-kroko-community.data",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-community.data",
+          "bytes": 155839318,
+          "sha256": "1af97abc84f28c6765e50d62307d1ac477b50e7fc2e62d6704d6288e7c863d80",
+          "role": "original-container"
+        },
+        {
+          "name": "encoder.onnx",
+          "asset": "fr-kroko-encoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-encoder.onnx",
+          "bytes": 154878660,
+          "sha256": "2056f2f0ef052d3c64877c43b89863a665f1ded54dd7ee047c5daf28e3dab331"
+        },
+        {
+          "name": "decoder.onnx",
+          "asset": "fr-kroko-decoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-decoder.onnx",
+          "bytes": 617488,
+          "sha256": "8646191d6b8bc3d6907f981cbf73ccff40c6ce88c8fd475a5e3b811e7d5281f8"
+        },
+        {
+          "name": "joiner.onnx",
+          "asset": "fr-kroko-joiner.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-joiner.onnx",
+          "bytes": 336817,
+          "sha256": "bce63118d73bc651cd61e82d3ddc2f49c5c4780324aaed78451590aceb999bf2"
+        },
+        {
+          "name": "tokens.txt",
+          "asset": "fr-kroko-tokens.txt",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-tokens.txt",
+          "bytes": 6197,
+          "sha256": "4416e94e9322203a580830c9a8a14e89959882f512b8fdda10d7fe3182097eb7"
+        }
+      ]
+    },
+    "de": {
+      "engine": "Kroko Community 64-L streaming DE",
+      "runtime": "sherpa-onnx",
+      "license": "CC-BY-SA",
+      "source": "https://huggingface.co/Banafo/Kroko-ASR",
+      "revision": "d45212aeb212dd66083dd22710c9954f40ff8cc1",
+      "files": [
+        {
+          "name": "Kroko-DE-Community-64-L-Streaming-001.data",
+          "asset": "de-kroko-community.data",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-community.data",
+          "bytes": 155839333,
+          "sha256": "0013d4b3e1216b4e0c15f18f345aa58ca8bb2cdbeff7a7d55a513f6b400862a5",
+          "role": "original-container"
+        },
+        {
+          "name": "encoder.onnx",
+          "asset": "de-kroko-encoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-encoder.onnx",
+          "bytes": 154878660,
+          "sha256": "c973664ab297df99faa5b7fc1eb8addabe468a323682cb40af98dc0ec13e985d"
+        },
+        {
+          "name": "decoder.onnx",
+          "asset": "de-kroko-decoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-decoder.onnx",
+          "bytes": 617488,
+          "sha256": "57cfda432138d2a552acfac9a052d8f2157eb9a93774d0cbf997601a2cb0aae5"
+        },
+        {
+          "name": "joiner.onnx",
+          "asset": "de-kroko-joiner.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-joiner.onnx",
+          "bytes": 336817,
+          "sha256": "a9e3759823edbe3e78c5cc114384757ebcb43db3b9cb9ce1e13b4be873e116bf"
+        },
+        {
+          "name": "tokens.txt",
+          "asset": "de-kroko-tokens.txt",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-tokens.txt",
+          "bytes": 6212,
+          "sha256": "540e317d5b171908ab109dbe9faa37ae8b05e1fa9b8c87fcc40654efba466965"
+        }
+      ]
+    },
+    "tr": {
+      "engine": "Kroko Community 64-L streaming TR",
+      "runtime": "sherpa-onnx",
+      "license": "CC-BY-SA",
+      "source": "https://huggingface.co/Banafo/Kroko-ASR",
+      "revision": "d45212aeb212dd66083dd22710c9954f40ff8cc1",
+      "files": [
+        {
+          "name": "Kroko-TR-Community-64-L-Streaming-001.data",
+          "asset": "tr-kroko-community.data",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-community.data",
+          "bytes": 155838546,
+          "sha256": "2f75336ba36b2464bcf062f7f6c8611fe2539cab17351ed7ed4ee1a03ed437a4",
+          "role": "original-container"
+        },
+        {
+          "name": "encoder.onnx",
+          "asset": "tr-kroko-encoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-encoder.onnx",
+          "bytes": 154878660,
+          "sha256": "d36d8abbcbd9d87c5446f296b59a9fce26ccd87c7edb278f61631ef3d02803a2"
+        },
+        {
+          "name": "decoder.onnx",
+          "asset": "tr-kroko-decoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-decoder.onnx",
+          "bytes": 617489,
+          "sha256": "08f317129a6ffed14f8755e61d50b1df6ac1cc5af3bdd832b7ea93961199217e"
+        },
+        {
+          "name": "joiner.onnx",
+          "asset": "tr-kroko-joiner.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-joiner.onnx",
+          "bytes": 336817,
+          "sha256": "aa49f0e96e4ef5ea408cb09f4b2ef5785995513b21fd8f04675d2f5f0ffcd1f3"
+        },
+        {
+          "name": "tokens.txt",
+          "asset": "tr-kroko-tokens.txt",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-tokens.txt",
+          "bytes": 5423,
+          "sha256": "c7e93bbc0f57852154df4e52005ae163d653f3daf0d1dbeb4f75a3ffa4b25c57"
+        }
+      ]
+    },
+    "pt-BR": {
+      "engine": "Kroko Community 64-L streaming PT",
+      "runtime": "sherpa-onnx",
+      "license": "CC-BY-SA",
+      "source": "https://huggingface.co/Banafo/Kroko-ASR",
+      "revision": "d45212aeb212dd66083dd22710c9954f40ff8cc1",
+      "files": [
+        {
+          "name": "Kroko-PT-Community-64-L-Streaming-001.data",
+          "asset": "pt-BR-kroko-community.data",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-community.data",
+          "bytes": 155839360,
+          "sha256": "36c4a92f25c9243cbd8f007cfc624b09986debf2919a1e397891e62e063d0e61",
+          "role": "original-container"
+        },
+        {
+          "name": "encoder.onnx",
+          "asset": "pt-BR-kroko-encoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-encoder.onnx",
+          "bytes": 154878660,
+          "sha256": "336b9a62fd37d8b94855fcbe0414000aa5f1bd75d4cb907e112bd6b7ef97c52e"
+        },
+        {
+          "name": "decoder.onnx",
+          "asset": "pt-BR-kroko-decoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-decoder.onnx",
+          "bytes": 617488,
+          "sha256": "2380832dbb1867779a550aea3948776d6a53ffa1cccd075bb7592ebaf21b7638"
+        },
+        {
+          "name": "joiner.onnx",
+          "asset": "pt-BR-kroko-joiner.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-joiner.onnx",
+          "bytes": 336817,
+          "sha256": "de7afbc23e7e55af7fed85780690b8f883c62b881fe14d546d9677151581962f"
+        },
+        {
+          "name": "tokens.txt",
+          "asset": "pt-BR-kroko-tokens.txt",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-tokens.txt",
+          "bytes": 6235,
+          "sha256": "e9b9b588c138558388c9a53385007082f58130a0ceddce8df6a4aed032162b3f"
+        }
+      ]
+    },
+    "it": {
+      "engine": "Kroko Community 64-L streaming IT",
+      "runtime": "sherpa-onnx",
+      "license": "CC-BY-SA",
+      "source": "https://huggingface.co/Banafo/Kroko-ASR",
+      "revision": "d45212aeb212dd66083dd22710c9954f40ff8cc1",
+      "files": [
+        {
+          "name": "Kroko-IT-Community-64-L-Streaming-001.data",
+          "asset": "it-kroko-community.data",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-community.data",
+          "bytes": 155839229,
+          "sha256": "e74cd91f89970639476353cfb7ba5044da10e36d8fb99c3a7a41c8b7c253726d",
+          "role": "original-container"
+        },
+        {
+          "name": "encoder.onnx",
+          "asset": "it-kroko-encoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-encoder.onnx",
+          "bytes": 154878660,
+          "sha256": "81c436e4f1cc381276859c858e3e881e382d0e0ca77a21bea1fde74c1275f6b2"
+        },
+        {
+          "name": "decoder.onnx",
+          "asset": "it-kroko-decoder.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-decoder.onnx",
+          "bytes": 617488,
+          "sha256": "f9c8093a12cb93b14e82f9205f1c4f57cb19143e0cca0079c6770c717611961c"
+        },
+        {
+          "name": "joiner.onnx",
+          "asset": "it-kroko-joiner.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-joiner.onnx",
+          "bytes": 336817,
+          "sha256": "3056ae55986ba4fb6203599baaeebb5f7eeb776798c3146df3bf76a198d172a9"
+        },
+        {
+          "name": "tokens.txt",
+          "asset": "it-kroko-tokens.txt",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-tokens.txt",
+          "bytes": 6107,
+          "sha256": "6c1ce19563e9fa59cc05ad921ccc31106497c1e2895346e2aa3fa936a103ed39"
+        }
+      ]
+    },
+    "en": {
+      "engine": "Moonshine Small streaming English",
+      "runtime": "moonshine",
+      "license": "MIT",
+      "source": "https://download.moonshine.ai/model/small-streaming-en/quantized_26_11_02/",
+      "revision": "quantized_26_11_02",
+      "files": [
+        {
+          "name": "adapter.ort",
+          "asset": "en-moonshine-small-adapter.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-adapter.ort",
+          "bytes": 2870320,
+          "sha256": "100d4806a3ba19b739fa9ae5c952e4d5267983090eea4a085e08d3e0bfd6875b"
+        },
+        {
+          "name": "cross_kv.ort",
+          "asset": "en-moonshine-small-cross_kv.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-cross_kv.ort",
+          "bytes": 5356496,
+          "sha256": "aa0ed033b7065ef744c36dce00228c708b43f2f2410e8ec782a960105c8595f7"
+        },
+        {
+          "name": "decoder_kv.ort",
+          "asset": "en-moonshine-small-decoder_kv.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-decoder_kv.ort",
+          "bytes": 82043616,
+          "sha256": "e4fae3869851b861177b5e1619c77ec9262365b2747ec322298d11753e88b38d"
+        },
+        {
+          "name": "encoder.ort",
+          "asset": "en-moonshine-small-encoder.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-encoder.ort",
+          "bytes": 44148536,
+          "sha256": "f61486dc7b017cee99196366dcc977a173f45f2f387b0b7977695d0f0565d234"
+        },
+        {
+          "name": "frontend.model.ort",
+          "asset": "en-moonshine-small-frontend.model.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-frontend.model.ort",
+          "bytes": 26992,
+          "sha256": "4a8d5ef7e99a5e3011dbf09ffac4176056587f2aec20f885d606b9f55fbed408"
+        },
+        {
+          "name": "frontend.weights.ort",
+          "asset": "en-moonshine-small-frontend.weights.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-frontend.weights.ort",
+          "bytes": 7769416,
+          "sha256": "5379f3dfebe849c6cbacf84f0aa7441956f9572efe1720d44aa267e7dff93056"
+        },
+        {
+          "name": "streaming_config.json",
+          "asset": "en-moonshine-small-streaming_config.json",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-streaming_config.json",
+          "bytes": 512,
+          "sha256": "26f02b6afb22d60871a5efd85c3d38e569cc0ddb6c5eb6e93d3260152ae8a47a"
+        },
+        {
+          "name": "tokenizer.bin",
+          "asset": "en-moonshine-small-tokenizer.bin",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-tokenizer.bin",
+          "bytes": 249974,
+          "sha256": "6884b35fd6377d4c4d32336a0bc152f36b64d1e45b6503683cdc238250a8472d"
+        }
+      ]
+    },
+    "es": {
+      "engine": "Moonshine Small streaming Spanish",
+      "runtime": "moonshine",
+      "license": "MIT",
+      "source": "https://download.moonshine.ai/model/small-streaming-es/quantized_26_08_24/",
+      "revision": "quantized_26_08_24",
+      "files": [
+        {
+          "name": "adapter.ort",
+          "asset": "es-moonshine-small-adapter.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-adapter.ort",
+          "bytes": 2869296,
+          "sha256": "04b54114c8aab534222922640f7ca0882948ff9f6ed76777f6e184e55a8e8b15"
+        },
+        {
+          "name": "cross_kv.ort",
+          "asset": "es-moonshine-small-cross_kv.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-cross_kv.ort",
+          "bytes": 5358752,
+          "sha256": "4bfd0a641d72ccdae22751f86bbb2e25ff70c1fba4f81213f2415a1accff9618"
+        },
+        {
+          "name": "decoder_kv.ort",
+          "asset": "es-moonshine-small-decoder_kv.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-decoder_kv.ort",
+          "bytes": 61314512,
+          "sha256": "5b77c3d6baf801ef925a5bc54d7eb3db0c35ebbb86f8eaf5390d7f5bb42fef37"
+        },
+        {
+          "name": "encoder.ort",
+          "asset": "es-moonshine-small-encoder.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-encoder.ort",
+          "bytes": 44358376,
+          "sha256": "a9b8d6d5d9348d0e319cceffdb0196ef622df8e4e9f3fb4797dcd8dfafd50857"
+        },
+        {
+          "name": "frontend.model.ort",
+          "asset": "es-moonshine-small-frontend.model.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-frontend.model.ort",
+          "bytes": 26776,
+          "sha256": "69c76287f49db365aa278d4908ec450e69ca1b4bfb7e836159d963d623ee0c13"
+        },
+        {
+          "name": "frontend.weights.ort",
+          "asset": "es-moonshine-small-frontend.weights.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-frontend.weights.ort",
+          "bytes": 7769280,
+          "sha256": "2f5a0eb5f3004c9447810d74274a352746319a32144e31d95ef410f425b84dda"
+        },
+        {
+          "name": "streaming_config.json",
+          "asset": "es-moonshine-small-streaming_config.json",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-streaming_config.json",
+          "bytes": 512,
+          "sha256": "12d16c7f5ea6734d197b79baf47914ea7e996d6fca8d303a19aca10d0617cecc"
+        },
+        {
+          "name": "tokenizer.bin",
+          "asset": "es-moonshine-small-tokenizer.bin",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-tokenizer.bin",
+          "bytes": 102888,
+          "sha256": "5fbb7d4314dcb18e03c5f975609e4a4cd572b22b01d2b2accb1b3e6830696f36"
+        }
+      ]
+    },
+    "ar": {
+      "engine": "Moonshine Tiny streaming Arabic",
+      "runtime": "moonshine",
+      "license": "MIT",
+      "source": "https://download.moonshine.ai/model/tiny-streaming-ar/quantized_26_08_24/",
+      "revision": "quantized_26_08_24",
+      "files": [
+        {
+          "name": "adapter.ort",
+          "asset": "ar-moonshine-tiny-adapter.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-adapter.ort",
+          "bytes": 1318472,
+          "sha256": "9c1278a338b4ff268fc5741be01446d56ca9cba9ff5f4a75c5e1b2c2e2739361"
+        },
+        {
+          "name": "cross_kv.ort",
+          "asset": "ar-moonshine-tiny-cross_kv.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-cross_kv.ort",
+          "bytes": 1288120,
+          "sha256": "e317af289233894f49da429d4561150c2f61ca86c1b9ca91c6edd3fb4fdeecb5"
+        },
+        {
+          "name": "decoder_kv.ort",
+          "asset": "ar-moonshine-tiny-decoder_kv.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-decoder_kv.ort",
+          "bytes": 19717336,
+          "sha256": "5c9a2bf2d9fc543fd4596b3ab4ab8d09f791aac5682eb1379fd8d59e34237db0"
+        },
+        {
+          "name": "encoder.ort",
+          "asset": "ar-moonshine-tiny-encoder.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-encoder.ort",
+          "bytes": 7772792,
+          "sha256": "6785ca9932d59265375249a8f3bc62f8333fb4dee6ab7db8dfd6f1daef66f59e"
+        },
+        {
+          "name": "frontend.model.ort",
+          "asset": "ar-moonshine-tiny-frontend.model.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-frontend.model.ort",
+          "bytes": 23176,
+          "sha256": "04c552e66efe3f7206d0a69779864f93bf3cfaf2fa595c9ce5101c8e3854a414"
+        },
+        {
+          "name": "frontend.weights.ort",
+          "asset": "ar-moonshine-tiny-frontend.weights.ort",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-frontend.weights.ort",
+          "bytes": 2093280,
+          "sha256": "6cc4d70efffe757452996574d11065e7dac6a7ff0a9be3e2fec1d0266b062b0e"
+        },
+        {
+          "name": "streaming_config.json",
+          "asset": "ar-moonshine-tiny-streaming_config.json",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-streaming_config.json",
+          "bytes": 509,
+          "sha256": "d31afd7c2dd5ee9ae3fa232312c5b42cb3e4fe1c6e9c53d885f2bea63023790a"
+        },
+        {
+          "name": "tokenizer.bin",
+          "asset": "ar-moonshine-tiny-tokenizer.bin",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-tokenizer.bin",
+          "bytes": 135726,
+          "sha256": "3acea39a89cdf44fa11f10bfdd7d05d9015d901999f8c8fa18988f19dcc6b267"
+        }
+      ]
+    },
+    "ru": {
+      "engine": "Vosk small streaming Russian INT8",
+      "runtime": "sherpa-onnx",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/alphacep/vosk-model-small-streaming-ru",
+      "revision": "e18123ee13f694036a1eea82eb43f9895387cb59",
+      "files": [
+        {
+          "name": "encoder.int8.onnx",
+          "asset": "ru-vosk-encoder.int8.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-encoder.int8.onnx",
+          "bytes": 26214060,
+          "sha256": "e0db705e94ec35d803b1df4f40cda23d064e1142977c80ab288430b109777a9d"
+        },
+        {
+          "name": "decoder.int8.onnx",
+          "asset": "ru-vosk-decoder.int8.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-decoder.int8.onnx",
+          "bytes": 1326289,
+          "sha256": "2b0df458692e1d090075c8249001136ef05240dd0d726a6b56552fd46c538b2d"
+        },
+        {
+          "name": "joiner.int8.onnx",
+          "asset": "ru-vosk-joiner.int8.onnx",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-joiner.int8.onnx",
+          "bytes": 259417,
+          "sha256": "b55784b071ab7512eab4c7c44e4f5478284ef33c83562cc6a249b972515a31e5"
+        },
+        {
+          "name": "tokens.txt",
+          "asset": "ru-vosk-tokens.txt",
+          "url": "https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-tokens.txt",
+          "bytes": 6388,
+          "sha256": "93bbbc0bae6b78c0bbb743d4aa9fded3bb5ff3aac5f0200e3a769a5a05e0fdf6"
+        }
+      ]
+    }
+  }
+}
