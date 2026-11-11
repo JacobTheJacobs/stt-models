@@ -1,15 +1,85 @@
-# stt-models
+# Offline Speech Recognition Research
 
-Open speech-recognition models for offline, on-device use, one per language. This repository
-holds only text: this README, a machine-readable [`manifest.json`](manifest.json) and the licence
-texts in [`LICENSES/`](LICENSES). The model files themselves are assets of the release
-[`models-v1`](https://github.com/JacobTheJacobs/stt-models/releases/tag/models-v1)
-(57 files, 1.96 GB).
+A small research project comparing transcription errors across open speech-recognition models
+in ten languages. The aim is to explore how the models handle recorded speech, compression and
+added noise. This repository also preserves a selection of model downloads with source credits,
+licences and checksums. No models were trained here.
 
-None of these models were trained here. They are redistributed from their publishers under the
-licences listed below, and all credit belongs to those publishers.
+## Word Error Rate by Model
 
-## Models
+**Measured 10 November 2026. Lower is better.** Each row uses the same 20 source recordings
+within its language, tested clean, after MP3 compression, and with added noise.
+Compare models within a language, not across different languages.
+
+| Language | Model | Clean WER | MP3 WER | Noisy WER |
+|---|---|---:|---:|---:|
+| English | [Moonshine Small streaming](https://github.com/moonshine-ai/moonshine) | 7.13% | 5.46% | 14.73% |
+| English | [Whistle](https://huggingface.co/Cactus-Compute/whistle) | 9.74% | 9.50% | 15.91% |
+| English | [Moonshine Tiny streaming](https://github.com/moonshine-ai/moonshine) | 18.53% | 13.30% | 23.99% |
+| Hebrew | [Zipformer2 66M INT8](https://huggingface.co/ivrit-ai/zipformer2-66m-streaming-he) | 26.10% | 26.10% | 37.83% |
+| Hebrew | [Kroko Community 64-L streaming](https://huggingface.co/Banafo/Kroko-ASR) | 34.02% | 35.48% | 42.23% |
+| Arabic | [Moonshine Tiny streaming](https://github.com/moonshine-ai/moonshine) | 22.62% | 23.14% | 29.82% |
+| German | [Kroko Community 64-L streaming](https://huggingface.co/Banafo/Kroko-ASR) | 12.50% | 13.02% | 15.36% |
+| German | [Moonshine Small streaming](https://github.com/moonshine-ai/moonshine) | 14.84% | 15.89% | 36.98% |
+| German | [Moonshine Tiny streaming](https://github.com/moonshine-ai/moonshine) | 18.49% | 18.23% | 52.34% |
+| German | [Whistle](https://huggingface.co/Cactus-Compute/whistle) | 26.04% | 26.82% | 45.57% |
+| Spanish | [Moonshine Small streaming](https://github.com/moonshine-ai/moonshine) | 8.53% | 8.74% | 10.45% |
+| Spanish | [Moonshine Tiny streaming](https://github.com/moonshine-ai/moonshine) | 8.96% | 8.96% | 12.15% |
+| Spanish | [Whistle](https://huggingface.co/Cactus-Compute/whistle) | 12.79% | 14.29% | 16.63% |
+| French | [Kroko Community 64-L streaming](https://huggingface.co/Banafo/Kroko-ASR) | 8.52% | 8.74% | 15.92% |
+| French | [Zipformer FR INT8](https://huggingface.co/shaojieli/sherpa-onnx-streaming-zipformer-fr-2023-04-14) | 13.00% | 13.23% | 23.09% |
+| French | [Whistle](https://huggingface.co/Cactus-Compute/whistle) | 19.06% | 19.51% | 42.60% |
+| Italian | [Kroko Community 64-L streaming](https://huggingface.co/Banafo/Kroko-ASR) | 4.89% | 4.89% | 5.87% |
+| Italian | [Whistle](https://huggingface.co/Cactus-Compute/whistle) | 13.69% | 13.20% | 21.27% |
+| Portuguese (Brazil) | [Kroko Community 64-L streaming](https://huggingface.co/Banafo/Kroko-ASR) | 9.48% | 9.05% | 11.42% |
+| Russian | [T-one (greedy, no language model)](https://github.com/voicekit-team/T-one) | 13.37% | 13.37% | 21.45% |
+| Russian | [Vosk small streaming INT8](https://huggingface.co/alphacep/vosk-model-small-streaming-ru) | 13.93% | 15.88% | 17.27% |
+| Turkish | [Kroko Community 64-L streaming](https://huggingface.co/Banafo/Kroko-ASR) | 9.51% | 8.93% | 10.95% |
+
+These are measured transcription errors, not a percentage of failed recordings. All 1,320 speech
+runs in this table completed without a reported execution error. A completed run can still
+produce an inaccurate transcript, as the WER values show.
+
+### How the Errors Were Measured
+
+- **Data:** 200 human read-speech recordings, 20 per language, from the
+  [FLEURS validation split](https://huggingface.co/datasets/google/fleurs)
+  (CC BY 4.0), revision `70bb2e84b976b7e960aa89f1c648e09c59f894dd`,
+  source indices 6 through 25 in each language.
+- **Conditions:** clean recordings; a 64 kbps MP3 encode/decode round trip; and synthetic white
+  noise at 15 dB signal-to-noise ratio. The three versions share the same source recording and
+  are not independent samples.
+- **Metric:** WER = 100 x (substitutions + deletions + insertions) / reference words.
+  Counts are pooled over all 20 recordings, not averaged per recording.
+- **Normalization:** Unicode NFC and case folding; punctuation separates words, except apostrophes
+  are removed. Diacritics are retained. Written numbers and digits are not treated as equivalent.
+  The table uses this basic WER consistently, not the more permissive accent-folded score.
+- **Silence check:** each of the 22 model/language combinations also received one four-second
+  silent file. All returned empty transcripts. One control per combination is not enough to
+  establish general resistance to hallucination.
+- **Scope:** offline, unpaced file transcription. This is not a live microphone, latency, battery
+  or memory benchmark. Conversational slang, dialect coverage and real-world background noise
+  were not tested.
+
+Twenty recordings per language is a small sample, not a definitive ranking. Differences of a few
+percentage points may not hold on a larger corpus. The recordings are public; absence from model
+training data has not been established. Additional speakers and spontaneous speech are needed
+before drawing broader conclusions. Audio and per-utterance transcripts are not included in this
+repository.
+
+## Model Downloads
+
+A subset of the tested models is preserved in
+[`models-v1`](https://github.com/JacobTheJacobs/stt-models/releases/tag/models-v1).
+This is a research snapshot, not a claim that every mirrored model has the lowest error.
+For example, T-one has lower clean WER than Vosk in this sample, while Vosk has lower noisy WER.
+
+[`manifest.json`](manifest.json) contains the exact source revisions, file names, download URLs,
+byte sizes and SHA-256 hashes. Verify sizes and hashes after downloading. Model weights are release
+assets, not Git source files.
+
+<details>
+<summary>Available models, runtimes, sizes and licences</summary>
 
 | Code | Language | Model | Runtime | Size | Licence |
 |---|---|---|---|---|---|
@@ -24,10 +94,11 @@ licences listed below, and all credit belongs to those publishers.
 | `ar` | Arabic | Moonshine Tiny streaming Arabic | moonshine | 32.3 MB | MIT |
 | `ru` | Russian | Vosk small streaming Russian INT8 | sherpa-onnx | 27.8 MB | Apache 2.0 |
 
-Download URLs have the form
-`https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/<asset>`.
-Asset names are `<language>-<model>-<original file name>`; `manifest.json` maps each asset back to
-the file name the runtime expects, with its byte size and SHA-256. Verify both after downloading.
+Kroko downloads include both the original container and its extracted payloads. The runtime only
+needs the extracted files; downloading both doubles the storage. The complete release contains
+57 assets totaling approximately 1.96 GB.
+
+</details>
 
 ## Files are unmodified
 
@@ -82,163 +153,6 @@ commit `d8d8fa29d05ca67441a7719e70099f9f48917a93`.
 (<https://alphacephei.com/vosk>), from <https://huggingface.co/alphacep/vosk-model-small-streaming-ru>,
 licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). No
 changes were made. Licence text: [`LICENSES/Apache-2.0.txt`](LICENSES/Apache-2.0.txt).
-
-## Per-model files
-
-### `he` Hebrew: Zipformer2 66M streaming Hebrew INT8
-
-- Licence: CC BY 4.0
-- Source: <https://huggingface.co/ivrit-ai/zipformer2-66m-streaming-he>
-- Revision: `ee769a2a13b887f91572eec349458bfb0fe79e7a`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `encoder.int8.onnx` | [`he-zipformer-encoder.int8.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-encoder.int8.onnx) | 70478964 | `6c6febcb74a09435315a1d872a6539f6e7fc2c333533f14c74edc0e85c49ffcd` |
-| `decoder.int8.onnx` | [`he-zipformer-decoder.int8.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-decoder.int8.onnx) | 1049105 | `feb03e7c8aa761593a9284a6fa1e91259be3702de75f630062256c1a59c5a906` |
-| `joiner.int8.onnx` | [`he-zipformer-joiner.int8.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-joiner.int8.onnx) | 771805 | `1d2c6d8e6dabc5eb52de52e95718e9bdfbffbfe7ead3808fb5ffd74e83bd9cae` |
-| `tokens.txt` | [`he-zipformer-tokens.txt`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/he-zipformer-tokens.txt) | 17086 | `e4ebb5e72a6aeef47437a55fa2308ebbedb7c51c557de7a89bf965c23ea9af4a` |
-
-### `fr` French: Kroko Community 64-L streaming FR
-
-- Licence: CC BY-SA
-- Source: <https://huggingface.co/Banafo/Kroko-ASR>
-- Revision: `d45212aeb212dd66083dd22710c9954f40ff8cc1`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `Kroko-FR-Community-64-L-Streaming-001.data` | [`fr-kroko-community.data`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-community.data) | 155839318 | `1af97abc84f28c6765e50d62307d1ac477b50e7fc2e62d6704d6288e7c863d80` |
-| `encoder.onnx` | [`fr-kroko-encoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-encoder.onnx) | 154878660 | `2056f2f0ef052d3c64877c43b89863a665f1ded54dd7ee047c5daf28e3dab331` |
-| `decoder.onnx` | [`fr-kroko-decoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-decoder.onnx) | 617488 | `8646191d6b8bc3d6907f981cbf73ccff40c6ce88c8fd475a5e3b811e7d5281f8` |
-| `joiner.onnx` | [`fr-kroko-joiner.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-joiner.onnx) | 336817 | `bce63118d73bc651cd61e82d3ddc2f49c5c4780324aaed78451590aceb999bf2` |
-| `tokens.txt` | [`fr-kroko-tokens.txt`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/fr-kroko-tokens.txt) | 6197 | `4416e94e9322203a580830c9a8a14e89959882f512b8fdda10d7fe3182097eb7` |
-
-### `de` German: Kroko Community 64-L streaming DE
-
-- Licence: CC BY-SA
-- Source: <https://huggingface.co/Banafo/Kroko-ASR>
-- Revision: `d45212aeb212dd66083dd22710c9954f40ff8cc1`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `Kroko-DE-Community-64-L-Streaming-001.data` | [`de-kroko-community.data`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-community.data) | 155839333 | `0013d4b3e1216b4e0c15f18f345aa58ca8bb2cdbeff7a7d55a513f6b400862a5` |
-| `encoder.onnx` | [`de-kroko-encoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-encoder.onnx) | 154878660 | `c973664ab297df99faa5b7fc1eb8addabe468a323682cb40af98dc0ec13e985d` |
-| `decoder.onnx` | [`de-kroko-decoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-decoder.onnx) | 617488 | `57cfda432138d2a552acfac9a052d8f2157eb9a93774d0cbf997601a2cb0aae5` |
-| `joiner.onnx` | [`de-kroko-joiner.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-joiner.onnx) | 336817 | `a9e3759823edbe3e78c5cc114384757ebcb43db3b9cb9ce1e13b4be873e116bf` |
-| `tokens.txt` | [`de-kroko-tokens.txt`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/de-kroko-tokens.txt) | 6212 | `540e317d5b171908ab109dbe9faa37ae8b05e1fa9b8c87fcc40654efba466965` |
-
-### `tr` Turkish: Kroko Community 64-L streaming TR
-
-- Licence: CC BY-SA
-- Source: <https://huggingface.co/Banafo/Kroko-ASR>
-- Revision: `d45212aeb212dd66083dd22710c9954f40ff8cc1`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `Kroko-TR-Community-64-L-Streaming-001.data` | [`tr-kroko-community.data`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-community.data) | 155838546 | `2f75336ba36b2464bcf062f7f6c8611fe2539cab17351ed7ed4ee1a03ed437a4` |
-| `encoder.onnx` | [`tr-kroko-encoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-encoder.onnx) | 154878660 | `d36d8abbcbd9d87c5446f296b59a9fce26ccd87c7edb278f61631ef3d02803a2` |
-| `decoder.onnx` | [`tr-kroko-decoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-decoder.onnx) | 617489 | `08f317129a6ffed14f8755e61d50b1df6ac1cc5af3bdd832b7ea93961199217e` |
-| `joiner.onnx` | [`tr-kroko-joiner.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-joiner.onnx) | 336817 | `aa49f0e96e4ef5ea408cb09f4b2ef5785995513b21fd8f04675d2f5f0ffcd1f3` |
-| `tokens.txt` | [`tr-kroko-tokens.txt`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/tr-kroko-tokens.txt) | 5423 | `c7e93bbc0f57852154df4e52005ae163d653f3daf0d1dbeb4f75a3ffa4b25c57` |
-
-### `pt-BR` Portuguese (Brazil): Kroko Community 64-L streaming PT
-
-- Licence: CC BY-SA
-- Source: <https://huggingface.co/Banafo/Kroko-ASR>
-- Revision: `d45212aeb212dd66083dd22710c9954f40ff8cc1`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `Kroko-PT-Community-64-L-Streaming-001.data` | [`pt-BR-kroko-community.data`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-community.data) | 155839360 | `36c4a92f25c9243cbd8f007cfc624b09986debf2919a1e397891e62e063d0e61` |
-| `encoder.onnx` | [`pt-BR-kroko-encoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-encoder.onnx) | 154878660 | `336b9a62fd37d8b94855fcbe0414000aa5f1bd75d4cb907e112bd6b7ef97c52e` |
-| `decoder.onnx` | [`pt-BR-kroko-decoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-decoder.onnx) | 617488 | `2380832dbb1867779a550aea3948776d6a53ffa1cccd075bb7592ebaf21b7638` |
-| `joiner.onnx` | [`pt-BR-kroko-joiner.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-joiner.onnx) | 336817 | `de7afbc23e7e55af7fed85780690b8f883c62b881fe14d546d9677151581962f` |
-| `tokens.txt` | [`pt-BR-kroko-tokens.txt`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/pt-BR-kroko-tokens.txt) | 6235 | `e9b9b588c138558388c9a53385007082f58130a0ceddce8df6a4aed032162b3f` |
-
-### `it` Italian: Kroko Community 64-L streaming IT
-
-- Licence: CC BY-SA
-- Source: <https://huggingface.co/Banafo/Kroko-ASR>
-- Revision: `d45212aeb212dd66083dd22710c9954f40ff8cc1`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `Kroko-IT-Community-64-L-Streaming-001.data` | [`it-kroko-community.data`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-community.data) | 155839229 | `e74cd91f89970639476353cfb7ba5044da10e36d8fb99c3a7a41c8b7c253726d` |
-| `encoder.onnx` | [`it-kroko-encoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-encoder.onnx) | 154878660 | `81c436e4f1cc381276859c858e3e881e382d0e0ca77a21bea1fde74c1275f6b2` |
-| `decoder.onnx` | [`it-kroko-decoder.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-decoder.onnx) | 617488 | `f9c8093a12cb93b14e82f9205f1c4f57cb19143e0cca0079c6770c717611961c` |
-| `joiner.onnx` | [`it-kroko-joiner.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-joiner.onnx) | 336817 | `3056ae55986ba4fb6203599baaeebb5f7eeb776798c3146df3bf76a198d172a9` |
-| `tokens.txt` | [`it-kroko-tokens.txt`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/it-kroko-tokens.txt) | 6107 | `6c1ce19563e9fa59cc05ad921ccc31106497c1e2895346e2aa3fa936a103ed39` |
-
-### `en` English: Moonshine Small streaming English
-
-- Licence: MIT
-- Source: <https://download.moonshine.ai/model/small-streaming-en/quantized_26_11_02/>
-- Revision: `quantized_26_11_02`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `adapter.ort` | [`en-moonshine-small-adapter.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-adapter.ort) | 2870320 | `100d4806a3ba19b739fa9ae5c952e4d5267983090eea4a085e08d3e0bfd6875b` |
-| `cross_kv.ort` | [`en-moonshine-small-cross_kv.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-cross_kv.ort) | 5356496 | `aa0ed033b7065ef744c36dce00228c708b43f2f2410e8ec782a960105c8595f7` |
-| `decoder_kv.ort` | [`en-moonshine-small-decoder_kv.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-decoder_kv.ort) | 82043616 | `e4fae3869851b861177b5e1619c77ec9262365b2747ec322298d11753e88b38d` |
-| `encoder.ort` | [`en-moonshine-small-encoder.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-encoder.ort) | 44148536 | `f61486dc7b017cee99196366dcc977a173f45f2f387b0b7977695d0f0565d234` |
-| `frontend.model.ort` | [`en-moonshine-small-frontend.model.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-frontend.model.ort) | 26992 | `4a8d5ef7e99a5e3011dbf09ffac4176056587f2aec20f885d606b9f55fbed408` |
-| `frontend.weights.ort` | [`en-moonshine-small-frontend.weights.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-frontend.weights.ort) | 7769416 | `5379f3dfebe849c6cbacf84f0aa7441956f9572efe1720d44aa267e7dff93056` |
-| `streaming_config.json` | [`en-moonshine-small-streaming_config.json`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-streaming_config.json) | 512 | `26f02b6afb22d60871a5efd85c3d38e569cc0ddb6c5eb6e93d3260152ae8a47a` |
-| `tokenizer.bin` | [`en-moonshine-small-tokenizer.bin`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/en-moonshine-small-tokenizer.bin) | 249974 | `6884b35fd6377d4c4d32336a0bc152f36b64d1e45b6503683cdc238250a8472d` |
-
-### `es` Spanish: Moonshine Small streaming Spanish
-
-- Licence: MIT
-- Source: <https://download.moonshine.ai/model/small-streaming-es/quantized_26_08_24/>
-- Revision: `quantized_26_08_24`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `adapter.ort` | [`es-moonshine-small-adapter.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-adapter.ort) | 2869296 | `04b54114c8aab534222922640f7ca0882948ff9f6ed76777f6e184e55a8e8b15` |
-| `cross_kv.ort` | [`es-moonshine-small-cross_kv.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-cross_kv.ort) | 5358752 | `4bfd0a641d72ccdae22751f86bbb2e25ff70c1fba4f81213f2415a1accff9618` |
-| `decoder_kv.ort` | [`es-moonshine-small-decoder_kv.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-decoder_kv.ort) | 61314512 | `5b77c3d6baf801ef925a5bc54d7eb3db0c35ebbb86f8eaf5390d7f5bb42fef37` |
-| `encoder.ort` | [`es-moonshine-small-encoder.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-encoder.ort) | 44358376 | `a9b8d6d5d9348d0e319cceffdb0196ef622df8e4e9f3fb4797dcd8dfafd50857` |
-| `frontend.model.ort` | [`es-moonshine-small-frontend.model.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-frontend.model.ort) | 26776 | `69c76287f49db365aa278d4908ec450e69ca1b4bfb7e836159d963d623ee0c13` |
-| `frontend.weights.ort` | [`es-moonshine-small-frontend.weights.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-frontend.weights.ort) | 7769280 | `2f5a0eb5f3004c9447810d74274a352746319a32144e31d95ef410f425b84dda` |
-| `streaming_config.json` | [`es-moonshine-small-streaming_config.json`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-streaming_config.json) | 512 | `12d16c7f5ea6734d197b79baf47914ea7e996d6fca8d303a19aca10d0617cecc` |
-| `tokenizer.bin` | [`es-moonshine-small-tokenizer.bin`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/es-moonshine-small-tokenizer.bin) | 102888 | `5fbb7d4314dcb18e03c5f975609e4a4cd572b22b01d2b2accb1b3e6830696f36` |
-
-### `ar` Arabic: Moonshine Tiny streaming Arabic
-
-- Licence: MIT
-- Source: <https://download.moonshine.ai/model/tiny-streaming-ar/quantized_26_08_24/>
-- Revision: `quantized_26_08_24`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `adapter.ort` | [`ar-moonshine-tiny-adapter.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-adapter.ort) | 1318472 | `9c1278a338b4ff268fc5741be01446d56ca9cba9ff5f4a75c5e1b2c2e2739361` |
-| `cross_kv.ort` | [`ar-moonshine-tiny-cross_kv.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-cross_kv.ort) | 1288120 | `e317af289233894f49da429d4561150c2f61ca86c1b9ca91c6edd3fb4fdeecb5` |
-| `decoder_kv.ort` | [`ar-moonshine-tiny-decoder_kv.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-decoder_kv.ort) | 19717336 | `5c9a2bf2d9fc543fd4596b3ab4ab8d09f791aac5682eb1379fd8d59e34237db0` |
-| `encoder.ort` | [`ar-moonshine-tiny-encoder.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-encoder.ort) | 7772792 | `6785ca9932d59265375249a8f3bc62f8333fb4dee6ab7db8dfd6f1daef66f59e` |
-| `frontend.model.ort` | [`ar-moonshine-tiny-frontend.model.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-frontend.model.ort) | 23176 | `04c552e66efe3f7206d0a69779864f93bf3cfaf2fa595c9ce5101c8e3854a414` |
-| `frontend.weights.ort` | [`ar-moonshine-tiny-frontend.weights.ort`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-frontend.weights.ort) | 2093280 | `6cc4d70efffe757452996574d11065e7dac6a7ff0a9be3e2fec1d0266b062b0e` |
-| `streaming_config.json` | [`ar-moonshine-tiny-streaming_config.json`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-streaming_config.json) | 509 | `d31afd7c2dd5ee9ae3fa232312c5b42cb3e4fe1c6e9c53d885f2bea63023790a` |
-| `tokenizer.bin` | [`ar-moonshine-tiny-tokenizer.bin`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ar-moonshine-tiny-tokenizer.bin) | 135726 | `3acea39a89cdf44fa11f10bfdd7d05d9015d901999f8c8fa18988f19dcc6b267` |
-
-### `ru` Russian: Vosk small streaming Russian INT8
-
-- Licence: Apache 2.0
-- Source: <https://huggingface.co/alphacep/vosk-model-small-streaming-ru>
-- Revision: `e18123ee13f694036a1eea82eb43f9895387cb59`
-
-| File | Release asset | Bytes | SHA-256 |
-|---|---|---:|---|
-| `encoder.int8.onnx` | [`ru-vosk-encoder.int8.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-encoder.int8.onnx) | 26214060 | `e0db705e94ec35d803b1df4f40cda23d064e1142977c80ab288430b109777a9d` |
-| `decoder.int8.onnx` | [`ru-vosk-decoder.int8.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-decoder.int8.onnx) | 1326289 | `2b0df458692e1d090075c8249001136ef05240dd0d726a6b56552fd46c538b2d` |
-| `joiner.int8.onnx` | [`ru-vosk-joiner.int8.onnx`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-joiner.int8.onnx) | 259417 | `b55784b071ab7512eab4c7c44e4f5478284ef33c83562cc6a249b972515a31e5` |
-| `tokens.txt` | [`ru-vosk-tokens.txt`](https://github.com/JacobTheJacobs/stt-models/releases/download/models-v1/ru-vosk-tokens.txt) | 6388 | `93bbbc0bae6b78c0bbb743d4aa9fded3bb5ff3aac5f0200e3a769a5a05e0fdf6` |
-
-For the Moonshine models the revision is the dated folder on the publisher's download server that
-the files were fetched from. For the Hugging Face models it is the repository commit.
-
-## How these were chosen
-
-Each model was the best open candidate for its language in a small pilot of 20 recordings per
-language, measured on a Mac and not on phones, so treat the selection as provisional.
 
 ## Disclaimer
 
